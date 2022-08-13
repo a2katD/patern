@@ -3,6 +3,7 @@ from views import *
 
 routes = {
     '': Index(),
+    '/contact': Contact(),
     '/aries': Aries(),
     '/taurus': Taurus(),
     '/gemini': Gemini(),

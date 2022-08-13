@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Контакты</title>
+    <style>
+ul {
+    float:center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+form{
+background-color:#ffffff;
+width:50%;
+margin:0 auto;
+padding:15px;
+}
+
+
+
+    </style>
+</head>
+<body>
+<ul>
+    <li><a href="/">Гороскоп</a></li>
+    <li><a href="/contact">Обратная связь</a></li>
+</ul>
+<form action="" method="post">
+    <fieldset>
+        <legend>Форма обратной связи</legend>
+        <br>
+        <label> Ваше имя: <input type="text" placeholder="Имя" required, name='name'></input></label><br><br>
+        <label> Ваш email: <input type="email" placeholder="Email" required name='email'></input></label><br><br>
+        <label>Текст сообщения:</label><br>
+        <label><textarea placeholder="Введите ваше сообщение" required name='text'
+                         style="width:450px;height:100px"></textarea></label><br><br>
+        <label>
+            <button type="submit">Отправить</button>
+            <button type="reset">Очистить</button>
+        </label>
+    </fieldset>
+</form>
+
+</body>
+</html>
