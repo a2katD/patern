@@ -1,47 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Гороскоп | Главная</title>
-    <style>
-ul {
-    float:center;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
+{% extends "base.html" %}
+{% block title %}
+Гороскоп | Главная
+{% endblock %}
 
-li {
-    float: left;
-}
+{% block style %}
+    {% include "inc-style.html" %}
+{% endblock %}
 
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
+{% block header %}
+    {% include "inc-header.html" %}
+{% endblock %}
 
-li a:hover {
-    background-color: #111;
-}
-.center {
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-}
-    </style>
-
-</head>
-<body>
-<ul>
-    <li><a href="/">Гороскоп</a></li>
-    <li><a href="/contact">Обратная связь</a></li>
-</ul>
-
+{% block body %}
 <div class="center" align="center">
     <h1>Гороскоп на каждый день</h1>
     <br>
@@ -121,6 +91,4 @@ li a:hover {
         </tr>
     </table>
 </div>
-</body>
-</html>
-
+{% endblock %}
