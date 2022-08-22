@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Гороскоп | Рыбы</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}
+Гороскоп | Рыбы
+{% endblock %}
+
+{% block style %}
+{% include "inc-style.html" %}
+{% endblock %}
+
+{% block header %}
+{% include "inc-header.html" %}
+{% endblock %}
+
+{% block body %}
 <center>
     <table width="800px" height="500px">
         <tr>
@@ -21,5 +28,4 @@
         </tr>
     </table>
 </center>
-</body>
-</html>
+{% endblock %}

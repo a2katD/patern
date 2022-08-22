@@ -1,49 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Контакты</title>
-    <style>
-ul {
-    float:center;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
+{% extends "base.html" %}
+{% block title %}
+Гороскоп | Дева
+{% endblock %}
 
-li {
-    float: left;
-}
+{% block style %}
+{% include "inc-style.html" %}
+{% endblock %}
 
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
+{% block header %}
+{% include "inc-header.html" %}
+{% endblock %}
 
-li a:hover {
-    background-color: #111;
-}
-form{
-background-color:#ffffff;
-width:50%;
-margin:0 auto;
-padding:15px;
-}
-
-
-
-    </style>
-</head>
-<body>
-<ul>
-    <li><a href="/">Гороскоп</a></li>
-    <li><a href="/contact">Обратная связь</a></li>
-</ul>
+{% block body %}
 <form action="" method="post">
     <fieldset>
         <legend>Форма обратной связи</legend>
@@ -59,6 +27,4 @@ padding:15px;
         </label>
     </fieldset>
 </form>
-
-</body>
-</html>
+{% endblock %}
