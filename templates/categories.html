@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}
+Нумерология | Категории
+{% endblock %}
+
+{% block style %}
+{% include "inc-style.html" %}
+{% endblock %}
+
+{% block header %}
+{% include "inc-header.html" %}
+{% endblock %}
+
+{% block body %}
+<div class="center">
+    <br>
+    <div>
+        <a class="butt1" href="/create-category/">Создать новую категорию</a>
+    </div>
+    <div>
+        <h1>Список существующих категорий</h1>
+        <ul class="list">
+            {% for item in objects_list %}
+            <a href="/courses-list/?id={{item.id}}">
+            <li>
+                {{item.name}}
+            </li>
+                </a>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

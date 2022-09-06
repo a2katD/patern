@@ -16,11 +16,18 @@ routes = {
     '/capricorn': Capricorn(),
     '/aquarius': Aquarius(),
     '/pisces': Pisces(),
+    '/categories': Categories(),
+
+    '/courses-list': CoursesList(),
+    '/create-course': CreateCourse(),
+    '/create-category': CreateCategory(),
+    '/category-list': CategoryList(),
+    '/copy-course': CopyCourse()
 }
 
 
 def date_time(request):
-    request['data'] = date.today()
+    request['date'] = date.today()
 
 
 fronts = [date_time]

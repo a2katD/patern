@@ -22,9 +22,8 @@ class Framework:
         request['method'] = method
         if method == 'POST':
             data = PostRequests().get_request_params(environ)
-            request['message'] = data
-            with open('message.txt', 'a+', encoding='utf-8') as f:
-                f.write(str(self.decode_value(data)) + '\n')
+            request['data'] = data
+            print(f'POST-запрос: {Framework.decode_value(data)}')
         if method == 'GET':
             request_params = GetRequests().get_request_params(environ)
             request['request_params'] = request_params

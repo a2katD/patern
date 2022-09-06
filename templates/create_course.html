@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}
+Создание курса
+{% endblock %}
+{% block style %}
+{% include "inc-style.html" %}
+{% endblock %}
+{% block header %}
+{% include "inc-header.html" %}
+{% endblock %}
+{% block body %}
+<div class="center">
+<div>
+    <a href="/courses-list/?id={{id}}">назад</a>
+</div>
+
+<br>
+<br>
+
+<div>
+    <h1>Создание курса для категории "{{name}}"</h1>
+    <form method="post">
+        <input type="text" name="name" placeholder="Название" class="inp1">
+        <br>
+        <select name="course_type" class="inp1">
+            <option value="vebinary">Вебинар</option>
+            <option value="video">Видеокурс</option>
+            <option value="book">Книга</option>
+        </select>
+        <br>
+        <button type="submit" class="butt2">Сохранить и вернуться к списку курсов</button>
+    </form>
+</div>
+</div>
+{% endblock %}
