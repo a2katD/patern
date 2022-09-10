@@ -1,5 +1,6 @@
 import copy
 import quopri
+import datetime as DT
 
 
 class User:
@@ -70,11 +71,12 @@ class CourseFactory:
 class Category:
     auto_id = 0
 
-    def __init__(self, name, category):
+    def __init__(self, name, category, category_head):
         self.id = Category.auto_id
         Category.auto_id += 1
         self.name = name
         self.category = category
+        self.category_head = category_head
         self.courses = []
 
     def course_count(self):
@@ -96,8 +98,8 @@ class Engine:
         return UserFactory.create(type_)
 
     @staticmethod
-    def create_category(name, category=None):
-        return Category(name, category)
+    def create_category(name, category=None, category_head=0):
+        return Category(name, category, category_head)
 
     def find_category_by_id(self, id):
         for item in self.categories:
@@ -145,8 +147,15 @@ class Logger(metaclass=LogerProto):
 
     @staticmethod
     def error(text):
-        print(f'log error: ', text)
+        now = DT.datetime.now(DT.timezone.utc).astimezone()
+        print(f'{now:{"%Y-%m-%d %H:%M:%S"}} log ERROR: ', text)
 
     @staticmethod
     def info(text):
-        print(f'log info: ', text)
+        now = DT.datetime.now(DT.timezone.utc).astimezone()
+        print(f'{now:{"%Y-%m-%d %H:%M:%S"}} log INFO: ', text)
+
+    @staticmethod
+    def debug(text):
+        now = DT.datetime.now(DT.timezone.utc).astimezone()
+        print(f'{now:{"%Y-%m-%d %H:%M:%S"}} log DEBUG: ', text)

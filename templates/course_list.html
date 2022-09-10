@@ -12,11 +12,26 @@
 <div class="center">
     <br>
     <div>
+        <a class="butt1" href="/create-category/">Создать новую категорию</a>
+    </div>
+    <div>
+
+        <h1>Список подкатегорий для "{{name}}"</h1>
+        <ul class="list">
+            {% for item in categories_list %}
+            {% if item.category_head == id + 1 %}
+            <li>
+                <span><a href="/courses-list/?id={{item.id}}">{{item.name}}</a></span>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        <br>
         <a class="butt1" href="/create-course/?id={{id}}">Создать новый курс</a>
         <br>
         <h1>Список курсов для категории "{{name}}"</h1>
         <ul class="list">
-            {% for item in objects_list %}
+            {% for item in courses_list %}
             {% if item.category.id == id %}
             <li>
                 {{item.name}} <span><a href="/copy-course/?id={{id}}&name={{item.name}}">скопировать</a></span>

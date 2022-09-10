@@ -1,6 +1,9 @@
 import quopri
-
+import sys
 from a2kat_framework.request import PostRequests, GetRequests
+
+sys.path.append('../')
+from patterns.create_patterns import Logger
 
 
 class PageNotFound404:
@@ -23,7 +26,7 @@ class Framework:
         if method == 'POST':
             data = PostRequests().get_request_params(environ)
             request['data'] = data
-            print(f'POST-запрос: {Framework.decode_value(data)}')
+            Logger.info(f'POST-запрос: {Framework.decode_value(data)}')
         if method == 'GET':
             request_params = GetRequests().get_request_params(environ)
             request['request_params'] = request_params
@@ -46,3 +49,23 @@ class Framework:
             val_decode = quopri.decodestring(val_bytes).decode('UTF-8')
             result[key] = val_decode
         return result
+
+
+class DebugApplication(Framework):
+    def __init__(self, routes_obj, fronts_obj):
+        self.application = Framework(routes_obj, fronts_obj)
+        super().__init__(routes_obj, fronts_obj)
+
+    def __call__(self, env, start_response):
+        Logger.debug(env)
+        return self.application(env, start_response)
+
+
+class FakeApplication(Framework):
+    def __init__(self, routes_obj, fronts_obj):
+        self.application = Framework(routes_obj, fronts_obj)
+        super().__init__(routes_obj, fronts_obj)
+
+    def __call__(self, env, start_response):
+        start_response('200 OK', [('Content-Type', 'text/html')])
+        return [b'Hello from Fake']
