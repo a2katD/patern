@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}
+Нумерология | Список преподавателей
+{% endblock %}
+{% block style %}
+{% include "inc-style.html" %}
+{% endblock %}
+{% block header %}
+{% include "inc-header.html" %}
+{% endblock %}
+{% block body %}
+<div class="center">
+    <div>
+        <br>
+        <a class='butt1' href="/create-teacher">Создать преподавателя</a>
+        <br>
+        <br>
+        <a class='butt1' href="/add-teacher">Записать преподавателя на курс</a>
+    </div>
+    <h1>Список Преподавателей</h1>
+    <div>
+        <ul class="list">
+            {% for item in objects_list %}
+            <li>
+                {{item.name}} <b style="color:black">Ведёт курсы:</b>
+                {% for course in item.courses %}
+                {{course.name}}
+                {% endfor %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

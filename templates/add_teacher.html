@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}
+Нумерология | Запись преподавателя на курс
+{% endblock %}
+{% block style %}
+{% include "inc-style.html" %}
+{% endblock %}
+{% block header %}
+{% include "inc-header.html" %}
+{% endblock %}
+{% block body %}
+<div class="center">
+    <h1>Запись преподавателя на курс</h1>
+    <form method="post">
+        <select name="teacher_name" class="inp1">
+            {% for item in teachers %}
+            <option value="{{item.name}}">{{item.name}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <select name="course_name" class="inp1">
+            {% for item in courses %}
+            <option value="{{item.name}}">{{item.name}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit" class="butt2">Записать</button>
+    </form>
+</div>
+{% endblock %}

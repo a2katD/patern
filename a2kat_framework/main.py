@@ -5,6 +5,7 @@ from a2kat_framework.request import PostRequests, GetRequests
 sys.path.append('../')
 from patterns.create_patterns import Logger
 
+logging = Logger('framework')
 
 class PageNotFound404:
     def __call__(self, request):
@@ -26,7 +27,7 @@ class Framework:
         if method == 'POST':
             data = PostRequests().get_request_params(environ)
             request['data'] = data
-            Logger.info(f'POST-запрос: {Framework.decode_value(data)}')
+            logging.info(f'POST-запрос: {Framework.decode_value(data)}')
         if method == 'GET':
             request_params = GetRequests().get_request_params(environ)
             request['request_params'] = request_params

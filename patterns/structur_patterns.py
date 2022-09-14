@@ -1,6 +1,8 @@
 from time import time
 from patterns.create_patterns import Logger
 
+logging = Logger('debug')
+
 
 class AppRoute:
     def __init__(self, routes, url):
@@ -22,7 +24,7 @@ class Debug:
                 result = method(*args, **kw)
                 end_time = time()
                 delta = end_time - start_time
-                Logger.debug(f'{self.name} выполнялся {delta:2.2f} ms')
+                logging.debug(f'{self.name} выполнялся {delta:2.2f} ms')
                 return result
 
             return timed

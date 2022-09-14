@@ -1,18 +1,24 @@
 import copy
 import quopri
 import datetime as DT
+from patterns.behavioral_patterns import ConsoleWriter, Subject
 
 
 class User:
-    pass
+    def __init__(self, name):
+        self.name = name
 
 
 class Teacher(User):
-    pass
+    def __init__(self, name):
+        self.courses = []
+        super().__init__(name)
 
 
 class Student(User):
-    pass
+    def __init__(self, name):
+        self.courses = []
+        super().__init__(name)
 
 
 class UserFactory:
@@ -22,8 +28,8 @@ class UserFactory:
     }
 
     @classmethod
-    def create(cls, type_):
-        return cls.types[type_]()
+    def create(cls, type_, name):
+        return cls.types[type_](name)
 
 
 class CoursePrototype:
@@ -31,11 +37,27 @@ class CoursePrototype:
         return copy.deepcopy(self)
 
 
-class Course(CoursePrototype):
+class Course(CoursePrototype, Subject):
     def __init__(self, name, category):
         self.name = name
         self.category = category
         self.category.courses.append(self)
+        self.students = []
+        self.teachers = []
+        super().__init__()
+
+    def __getitem__(self, item):
+        return self.students[item]
+
+    def add_student(self, student: Student):
+        self.students.append(student)
+        student.courses.append(self)
+        self.notify('student')
+
+    def add_teacher(self, teacher: Teacher):
+        self.teachers.append(teacher)
+        teacher.courses.append(self)
+        self.notify('teacher')
 
 
 class VebunaryCourse(Course):
@@ -94,8 +116,8 @@ class Engine:
         self.categories = []
 
     @staticmethod
-    def create_user(type_):
-        return UserFactory.create(type_)
+    def create_user(type_, name):
+        return UserFactory.create(type_, name)
 
     @staticmethod
     def create_category(name, category=None, category_head=0):
@@ -123,6 +145,16 @@ class Engine:
         val_decode_str = quopri.decodestring(val_b)
         return val_decode_str.decode('UTF-8')
 
+    def get_student(self, name):
+        for item in self.students:
+            if item.name == name:
+                return item
+
+    def get_teacher(self, name):
+        for item in self.teachers:
+            if item.name == name:
+                return item
+
 
 class LogerProto(type):
     def __init__(cls, name, bases, attrs, **kwargs):
@@ -142,20 +174,21 @@ class LogerProto(type):
 
 
 class Logger(metaclass=LogerProto):
-    def __init__(self, name):
+    def __init__(self, name, writer=ConsoleWriter()):
         self.name = name
+        self.writer = writer
 
-    @staticmethod
-    def error(text):
+    def error(self, text):
         now = DT.datetime.now(DT.timezone.utc).astimezone()
-        print(f'{now:{"%Y-%m-%d %H:%M:%S"}} log ERROR: ', text)
+        log = f'{now:{"%Y-%m-%d %H:%M:%S"}} log ERROR: {text}'
+        self.writer.write(log)
 
-    @staticmethod
-    def info(text):
+    def info(self, text):
         now = DT.datetime.now(DT.timezone.utc).astimezone()
-        print(f'{now:{"%Y-%m-%d %H:%M:%S"}} log INFO: ', text)
+        log = f'{now:{"%Y-%m-%d %H:%M:%S"}} log INFO: {text}'
+        self.writer.write(log)
 
-    @staticmethod
-    def debug(text):
+    def debug(self, text):
         now = DT.datetime.now(DT.timezone.utc).astimezone()
-        print(f'{now:{"%Y-%m-%d %H:%M:%S"}} log DEBUG: ', text)
+        log = f'{now:{"%Y-%m-%d %H:%M:%S"}} log DEBUG: {text}'
+        self.writer.write(log)
